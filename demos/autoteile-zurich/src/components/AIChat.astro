@@ -285,11 +285,20 @@ const { businessType = 'default', companyName = 'Unser Team', phone, mapsUrl } =
   });
 
   // Auto-open chat on page load (only on desktop, not on mobile)
-  const isMobile = window.innerWidth < 768;
-  if (!isMobile) {
-    setTimeout(() => {
+  const checkAndAutoOpen = () => {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    if (!isMobile) {
       chatWindow?.classList.remove('hidden');
       initChat();
-    }, 1000);
+    }
+  };
+
+  // Wait for page to be fully loaded before checking
+  if (document.readyState === 'complete') {
+    setTimeout(checkAndAutoOpen, 1000);
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(checkAndAutoOpen, 1000);
+    });
   }
 </script>
