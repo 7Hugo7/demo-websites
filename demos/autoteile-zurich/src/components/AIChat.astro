@@ -10,17 +10,17 @@ interface Props {
 const { businessType = 'default', companyName = 'Unser Team', phone, mapsUrl } = Astro.props;
 ---
 
-<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50">
+<div id="ai-chat-widget" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50">
   <button
     id="chat-toggle"
-    class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-110"
+    class="bg-blue-600 text-white p-3 md:p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-110"
   >
     💬
   </button>
 
   <div
     id="chat-window"
-    class="hidden absolute bottom-16 right-0 w-96 bg-white rounded-lg shadow-2xl border border-gray-200"
+    class="hidden fixed md:absolute bottom-0 left-0 right-0 md:bottom-16 md:right-0 md:left-auto w-full md:w-96 bg-white md:rounded-lg shadow-2xl border-t md:border border-gray-200 max-h-[80vh] md:max-h-none"
   >
     <div class="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
       <h3 class="font-semibold">Chat Assistent</h3>
@@ -284,9 +284,12 @@ const { businessType = 'default', companyName = 'Unser Team', phone, mapsUrl } =
     chatWindow?.classList.add('hidden');
   });
 
-  // Auto-open chat on page load
-  setTimeout(() => {
-    chatWindow?.classList.remove('hidden');
-    initChat();
-  }, 1000);
+  // Auto-open chat on page load (only on desktop, not on mobile)
+  const isMobile = window.innerWidth < 768;
+  if (!isMobile) {
+    setTimeout(() => {
+      chatWindow?.classList.remove('hidden');
+      initChat();
+    }, 1000);
+  }
 </script>

@@ -1,0 +1,38 @@
+---
+---
+
+<div id="disclaimer-popup" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
+  <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-4 md:p-6">
+    <div class="text-center">
+      <div class="text-4xl md:text-5xl mb-3 md:mb-4">⚠️</div>
+      <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 md:mb-4">Wichtiger Hinweis</h2>
+      <p class="text-sm md:text-base text-gray-700 mb-4 md:mb-6">
+        Dies ist <strong>keine offizielle Website</strong> des Unternehmens Autoteile Zürich.
+        Diese Seite dient ausschließlich zu Demonstrationszwecken.
+      </p>
+      <button
+        id="accept-disclaimer"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors w-full text-sm md:text-base"
+      >
+        Verstanden
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const popup = document.getElementById('disclaimer-popup');
+  const acceptButton = document.getElementById('accept-disclaimer');
+
+  // Check if user has already seen the disclaimer
+  const disclaimerAccepted = localStorage.getItem('disclaimer-accepted');
+
+  if (!disclaimerAccepted) {
+    popup?.classList.remove('hidden');
+  }
+
+  acceptButton?.addEventListener('click', () => {
+    localStorage.setItem('disclaimer-accepted', 'true');
+    popup?.classList.add('hidden');
+  });
+</script>
