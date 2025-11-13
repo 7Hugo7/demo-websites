@@ -1,0 +1,25 @@
+---
+interface TimeSlot {
+  day: string;
+  hours: string;
+}
+
+interface Props {
+  schedule: TimeSlot[];
+  title?: string;
+}
+
+const { schedule, title = "Öffnungszeiten" } = Astro.props;
+---
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h3 class="text-2xl font-semibold mb-4 text-blue-600">{title}</h3>
+  <div class="space-y-2">
+    {schedule.map((slot) => (
+      <div class="flex justify-between border-b border-gray-200 pb-2">
+        <span class="font-medium text-gray-700">{slot.day}</span>
+        <span class="text-gray-600">{slot.hours}</span>
+      </div>
+    ))}
+  </div>
+</div>

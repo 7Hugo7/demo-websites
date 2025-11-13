@@ -1,0 +1,18 @@
+---
+interface Props {
+  companyName: string;
+  year?: number;
+}
+
+const { companyName, year = new Date().getFullYear() } = Astro.props;
+---
+
+<footer class="bg-gray-900 text-white py-8 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    <p class="text-gray-400">&copy; {year} {companyName}. Alle Rechte vorbehalten.</p>
+    <div class="mt-4 space-x-4">
+      <a href="#" class="text-gray-400 hover:text-white transition-colors">Impressum</a>
+      <a href="#" class="text-gray-400 hover:text-white transition-colors">Datenschutz</a>
+    </div>
+  </div>
+</footer>

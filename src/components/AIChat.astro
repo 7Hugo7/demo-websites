@@ -1,0 +1,292 @@
+---
+// Interactive AI Chat Widget for Demo (with predefined responses)
+interface Props {
+  businessType?: 'auto-parts' | 'bakery' | 'lawyer' | 'restaurant' | 'default';
+  companyName?: string;
+  phone?: string;
+  mapsUrl?: string;
+}
+
+const { businessType = 'default', companyName = 'Unser Team', phone, mapsUrl } = Astro.props;
+---
+
+<div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50">
+  <button
+    id="chat-toggle"
+    class="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-110"
+  >
+    💬
+  </button>
+
+  <div
+    id="chat-window"
+    class="hidden absolute bottom-16 right-0 w-96 bg-white rounded-lg shadow-2xl border border-gray-200"
+  >
+    <div class="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
+      <h3 class="font-semibold">Chat Assistent</h3>
+      <button id="chat-close" class="text-white hover:text-gray-200">✕</button>
+    </div>
+
+    <div id="chat-messages" class="h-96 overflow-y-auto p-4 space-y-3 bg-gray-50">
+      <!-- Messages will be inserted here -->
+    </div>
+
+    <div id="chat-input-area" class="p-4 border-t border-gray-200 bg-white">
+      <!-- Quick replies or form will be inserted here -->
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ businessType, companyName, phone, mapsUrl }}>
+  const toggle = document.getElementById('chat-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatClose = document.getElementById('chat-close');
+  const messagesContainer = document.getElementById('chat-messages');
+  const inputArea = document.getElementById('chat-input-area');
+
+  let currentStep = 'welcome';
+
+  // Business-specific configurations
+  const businessConfig = {
+    'auto-parts': {
+      welcome: `Guten Tag! Ich helfe Ihnen gerne bei ${companyName}. Wie kann ich Sie unterstützen?`,
+      options: [
+        { text: 'Ersatzteil suchen', value: 'search-part' },
+        { text: 'Angebot anfragen', value: 'request-quote' },
+        { text: 'Öffnungszeiten', value: 'opening-hours' },
+        { text: 'Anfahrt', value: 'directions' }
+      ]
+    },
+    'bakery': {
+      welcome: `Hallo! 👋 Willkommen bei ${companyName}. Wie kann ich Ihnen helfen?`,
+      options: [
+        { text: '🍰 Torte bestellen', value: 'order-cake' },
+        { text: '🥖 Produktsortiment', value: 'products' },
+        { text: '🕒 Öffnungszeiten', value: 'opening-hours' },
+        { text: '📞 Kontakt', value: 'contact' }
+      ]
+    },
+    'lawyer': {
+      welcome: `Guten Tag. Wie kann ich Ihnen bei ${companyName} weiterhelfen?`,
+      options: [
+        { text: 'Beratung anfragen', value: 'request-consultation' },
+        { text: 'Fachgebiete', value: 'practice-areas' },
+        { text: 'Termin vereinbaren', value: 'book-appointment' },
+        { text: 'Kontakt', value: 'contact' }
+      ]
+    },
+    'restaurant': {
+      welcome: `Hallo! 👋 Willkommen bei ${companyName}. Wie kann ich Ihnen helfen?`,
+      options: [
+        { text: '🍽️ Tisch reservieren', value: 'reserve-table' },
+        { text: '📋 Speisekarte', value: 'menu' },
+        { text: '🕒 Öffnungszeiten', value: 'opening-hours' },
+        { text: '📞 Kontakt', value: 'contact' }
+      ]
+    },
+    'default': {
+      welcome: `Hallo! Wie kann ich Ihnen bei ${companyName} helfen?`,
+      options: [
+        { text: 'Angebot anfragen', value: 'request-quote' },
+        { text: 'Öffnungszeiten', value: 'opening-hours' },
+        { text: 'Kontakt', value: 'contact' }
+      ]
+    }
+  };
+
+  const config = businessConfig[businessType] || businessConfig['default'];
+
+  function addMessage(text, isBot = true) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = isBot
+      ? 'bg-white p-3 rounded-lg shadow-sm border border-gray-200 max-w-[85%]'
+      : 'bg-blue-600 text-white p-3 rounded-lg shadow-sm ml-auto max-w-[85%]';
+    messageDiv.innerHTML = `<p class="text-sm">${text}</p>`;
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  function showQuickReplies(options) {
+    inputArea.innerHTML = '';
+    const container = document.createElement('div');
+    container.className = 'flex flex-col gap-2';
+
+    options.forEach(option => {
+      const button = document.createElement('button');
+      button.className = 'bg-gray-100 hover:bg-blue-50 text-gray-800 px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-gray-300 hover:border-blue-600';
+      button.textContent = option.text;
+      button.onclick = () => handleOptionClick(option.value, option.text);
+      container.appendChild(button);
+    });
+
+    inputArea.appendChild(container);
+  }
+
+  function showForm(type) {
+    inputArea.innerHTML = '';
+    const container = document.createElement('div');
+    container.className = 'space-y-3';
+
+    const form = document.createElement('form');
+    form.className = 'space-y-3';
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      handleFormSubmit(type, new FormData(form));
+    };
+
+    if (type === 'auto-parts') {
+      form.innerHTML = `
+        <div>
+          <label class="block text-xs font-medium mb-1">Ihr Name *</label>
+          <input type="text" name="name" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1">Ihr Fahrzeug *</label>
+          <input type="text" name="vehicle" placeholder="z.B. VW Golf 7, 2015" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1">Welches Ersatzteil? *</label>
+          <textarea name="part" rows="2" placeholder="z.B. Bremsbeläge vorne" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1">Telefon oder E-Mail *</label>
+          <input type="text" name="contact" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm">
+          Anfrage senden
+        </button>
+      `;
+    } else {
+      form.innerHTML = `
+        <div>
+          <label class="block text-xs font-medium mb-1">Ihr Name *</label>
+          <input type="text" name="name" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1">E-Mail oder Telefon *</label>
+          <input type="text" name="contact" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1">Ihre Nachricht *</label>
+          <textarea name="message" rows="3" required class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm">
+          Nachricht senden
+        </button>
+      `;
+    }
+
+    // Back button
+    const backButton = document.createElement('button');
+    backButton.type = 'button';
+    backButton.className = 'w-full bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors text-sm border border-gray-300';
+    backButton.textContent = '🔙 Zurück zum Menü';
+    backButton.onclick = () => handleOptionClick('back', '🔙 Zurück zum Menü');
+
+    container.appendChild(form);
+    container.appendChild(backButton);
+    inputArea.appendChild(container);
+  }
+
+  function handleOptionClick(value, text) {
+    addMessage(text, false);
+
+    setTimeout(() => {
+      switch(value) {
+        case 'search-part':
+        case 'request-quote':
+          addMessage('Perfekt! Füllen Sie bitte kurz das Formular aus und wir melden uns binnen 24 Stunden bei Ihnen. 📋');
+          setTimeout(() => showForm('auto-parts'), 500);
+          break;
+
+        case 'order-cake':
+          addMessage('Gerne helfen wir Ihnen bei der Tortenbestellung! Bitte füllen Sie das Formular aus. 🍰');
+          setTimeout(() => showForm('default'), 500);
+          break;
+
+        case 'opening-hours':
+          addMessage('Unsere Öffnungszeiten:<br><br>📅 Montag - Freitag<br>🕒 09:00 - 11:00 Uhr<br>🕒 14:00 - 16:30 Uhr<br><br>Samstag & Sonntag: Geschlossen');
+          setTimeout(() => {
+            showQuickReplies([
+              { text: '🔙 Zurück zum Menü', value: 'back' },
+              { text: phone ? `📞 Anrufen: ${phone}` : '📞 Anrufen', value: 'call' }
+            ]);
+          }, 500);
+          break;
+
+        case 'directions':
+          addMessage('Sie finden uns hier:<br><br>📍 Gutstrasse 158<br>8055 Zürich<br><br>Gut erreichbar mit ÖV und Auto. Parkplätze vorhanden.');
+          setTimeout(() => {
+            showQuickReplies([
+              { text: '🔙 Zurück zum Menü', value: 'back' },
+              { text: '🗺️ In Google Maps öffnen', value: 'maps' }
+            ]);
+          }, 500);
+          break;
+
+        case 'contact':
+        case 'products':
+          addMessage('Gerne! Wie kann ich Ihnen weiterhelfen? Füllen Sie bitte das Kontaktformular aus.');
+          setTimeout(() => showForm('default'), 500);
+          break;
+
+        case 'back':
+          addMessage('Gerne! Womit kann ich Ihnen helfen?');
+          setTimeout(() => showQuickReplies(config.options), 500);
+          break;
+
+        case 'call':
+          if (phone) {
+            window.location.href = `tel:${phone.replace(/\s/g, '')}`;
+          }
+          break;
+
+        case 'maps':
+          if (mapsUrl) {
+            addMessage('Öffne Google Maps...');
+            setTimeout(() => {
+              window.open(mapsUrl, '_blank');
+            }, 500);
+          } else {
+            addMessage('Google Maps Link ist nicht verfügbar.');
+          }
+          break;
+      }
+    }, 300);
+  }
+
+  function handleFormSubmit(type, formData) {
+    const data = Object.fromEntries(formData);
+    console.log('Form submitted:', data);
+
+    addMessage('Vielen Dank für Ihre Anfrage! ✅', false);
+    setTimeout(() => {
+      addMessage('Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns in Kürze bei Ihnen!<br><br>In dringenden Fällen erreichen Sie uns auch telefonisch.' + (phone ? `<br><br>📞 ${phone}` : ''));
+      inputArea.innerHTML = '<div class="text-center text-sm text-gray-500">Chat beendet</div>';
+    }, 500);
+  }
+
+  function initChat() {
+    messagesContainer.innerHTML = '';
+    addMessage(config.welcome);
+    setTimeout(() => showQuickReplies(config.options), 500);
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isHidden = chatWindow?.classList.contains('hidden');
+    chatWindow?.classList.toggle('hidden');
+    if (isHidden && messagesContainer.children.length === 0) {
+      setTimeout(initChat, 200);
+    }
+  });
+
+  chatClose?.addEventListener('click', () => {
+    chatWindow?.classList.add('hidden');
+  });
+
+  // Auto-open chat on page load
+  setTimeout(() => {
+    chatWindow?.classList.remove('hidden');
+    initChat();
+  }, 1000);
+</script>

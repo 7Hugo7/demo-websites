@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import OpeningHours from '../components/OpeningHours.astro';
+import ImageCard from '../components/ImageCard.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const schedule = [
+  { day: "Montag - Freitag", hours: "09:00 - 11:00 Uhr" },
+  { day: "Montag - Freitag", hours: "14:00 - 16:30 Uhr" },
+  { day: "Samstag", hours: "Geschlossen" },
+  { day: "Sonntag", hours: "Geschlossen" }
+];
+
+const teamMembers = [
+  {
+    name: "Fachpersonal vor Ort",
+    role: "Unsere Ersatzteil-Profis kennen jedes Fahrzeugmodell",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=400&fit=crop"
+  },
+  {
+    name: "Großes Lager in Zürich",
+    role: "Tausende Original-Ersatzteile direkt verfügbar an der Gutstrasse 158",
+    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&h=400&fit=crop"
+  },
+  {
+    name: "Persönliche Beratung",
+    role: "Individuelle Lösungen für Ihr Fahrzeug - vor Ort oder telefonisch",
+    image: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=400&h=400&fit=crop"
+  }
+];
+---
+
+<Layout
+  title="Über uns - Auto Teile Zürich AG"
+  description="Auto Teile Zürich AG an der Gutstrasse 158 - Ihr Spezialist für Original-Ersatzteile in Zürich. Markenqualität von Fuchs, Rowe und Liqui Moly."
+>
+  <Navigation companyName="Auto Teile Zürich AG" phone="044 455 33 11" currentPage="ueber-uns" />
+
+  <Hero
+    title="Auto Teile Zürich AG - Seit Jahren in Zürich"
+    subtitle="Ihr Spezialist für Original-Ersatzteile an der Gutstrasse 158 in Zürich"
+    backgroundImage="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1200&h=600&fit=crop"
+  />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop"
+            alt="Auto Teile Zürich Werkstatt"
+            class="rounded-lg shadow-lg"
+          />
+        </div>
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Ihr Ersatzteil-Spezialist in Zürich</h2>
+          <p class="text-gray-600 mb-4">
+            Die Auto Teile Zürich AG (ATZ) an der Gutstrasse 158 ist seit Jahren die erste Anlaufstelle für
+            Original-Ersatzteile in Zürich. Ob Sie einen VW Golf, BMW 3er, Mercedes C-Klasse oder einen Opel Astra fahren -
+            bei uns finden Sie garantiert das passende Original-Ersatzteil zu fairen Preisen.
+          </p>
+          <p class="text-gray-600 mb-4">
+            Unser Sortiment umfasst Qualitäts-Markenteile von Fuchs, Rowe, Liqui Moly und weiteren Top-Herstellern.
+            Von Bremsbelägen und Bremsscheiben über Ölfilter und Luftfilter bis zu komplexen Motorteilen und Fahrwerkskomponenten -
+            Auto Teile Zürich hat tausende Ersatzteile direkt an der Gutstrasse 158 auf Lager.
+          </p>
+          <p class="text-gray-600">
+            Besuchen Sie uns Montag bis Freitag zwischen 09:00-11:00 Uhr und 14:00-16:30 Uhr an der Gutstrasse 158 in 8055 Zürich,
+            oder rufen Sie uns an unter 044 455 33 11. Wir beraten Sie gerne persönlich!
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        {teamMembers.map((member) => (
+          <ImageCard
+            src={member.image}
+            alt={member.name}
+            title={member.name}
+            description={member.role}
+          />
+        ))}
+      </div>
+
+      <div class="bg-gray-50 rounded-lg p-8">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Warum Auto Teile Zürich?</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 text-xl">✓</span>
+                <span class="text-gray-600"><strong>Original-Markenteile:</strong> Nur Fuchs, Rowe, Liqui Moly und weitere Top-Hersteller</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 text-xl">✓</span>
+                <span class="text-gray-600"><strong>Standort in Zürich:</strong> Gutstrasse 158, 8055 Zürich - gut erreichbar</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 text-xl">✓</span>
+                <span class="text-gray-600"><strong>Express-Service:</strong> Angebot innert 24h nach Anfrage mit Fahrzeugausweis</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 text-xl">✓</span>
+                <span class="text-gray-600"><strong>Faire Preise:</strong> Transparente Kalkulation ohne versteckte Kosten</span>
+              </li>
+            </ul>
+          </div>
+          <OpeningHours schedule={schedule} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer companyName="Auto Teile Zürich AG" />
+  <AIChat
+    businessType="auto-parts"
+    companyName="Auto Teile Zürich AG"
+    phone="044 455 33 11"
+    mapsUrl="https://www.google.de/maps/place/AutoTeile+Z%C3%BCrich+AG/@47.3742498,8.5005682,16z/data=!3m1!4b1!4m6!3m5!1s0x47900a23eda4d50d:0x3d36dff4669b3f79!8m2!3d47.3742462!4d8.5031431!16s%2Fg%2F1tcy7tf4?entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D"
+  />
+</Layout>

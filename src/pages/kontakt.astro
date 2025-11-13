@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Contact from '../components/Contact.astro';
+import OpeningHours from '../components/OpeningHours.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const schedule = [
+  { day: "Montag - Freitag", hours: "09:00 - 11:00 Uhr" },
+  { day: "Montag - Freitag", hours: "14:00 - 16:30 Uhr" },
+  { day: "Samstag", hours: "Geschlossen" },
+  { day: "Sonntag", hours: "Geschlossen" }
+];
+---
+
+<Layout
+  title="Kontakt - Auto Teile Zürich AG"
+  description="Kontaktieren Sie Auto Teile Zürich AG an der Gutstrasse 158 in Zürich. Telefon: 044 455 33 11. Öffnungszeiten Mo-Fr 09:00-11:00 und 14:00-16:30 Uhr."
+>
+  <Navigation companyName="Auto Teile Zürich AG" phone="044 455 33 11" currentPage="kontakt" />
+
+  <Hero
+    title="Wir sind für Sie da"
+    subtitle="Rufen Sie uns an unter 044 455 33 11 oder besuchen Sie uns an der Gutstrasse 158 in Zürich"
+    backgroundImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=600&fit=crop"
+  />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 mb-12">
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Auto Teile Zürich AG</h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="text-blue-600 text-2xl">📍</div>
+              <div>
+                <h3 class="font-semibold mb-1">Unser Standort in Zürich</h3>
+                <p class="text-gray-600">
+                  <strong>Auto Teile Zürich AG</strong><br />
+                  Gutstrasse 158<br />
+                  8055 Zürich<br />
+                  Schweiz
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="text-blue-600 text-2xl">📞</div>
+              <div>
+                <h3 class="font-semibold mb-1">Rufen Sie uns an</h3>
+                <a href="tel:0444553311" class="text-blue-600 hover:underline text-lg font-semibold">044 455 33 11</a>
+                <p class="text-gray-600 text-sm mt-1">Sofortige Beratung von unseren Ersatzteil-Profis</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="text-blue-600 text-2xl">🕒</div>
+              <div class="w-full">
+                <OpeningHours schedule={schedule} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-3xl font-bold mb-6">Anfrage für Ihr Fahrzeug</h2>
+          <p class="text-gray-600 mb-4">
+            Senden Sie uns Ihre Anfrage oder laden Sie Ihren Fahrzeugausweis hoch -
+            wir melden uns binnen 24 Stunden mit einem individuellen Angebot.
+          </p>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Ihr Name *</label>
+              <input
+                type="text"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">E-Mail *</label>
+              <input
+                type="email"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Telefon</label>
+              <input
+                type="tel"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Ihr Fahrzeug *</label>
+              <input
+                type="text"
+                placeholder="z.B. VW Golf 7, 2015 oder BMW 320d, 2018"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Welches Ersatzteil benötigen Sie? *</label>
+              <textarea
+                rows="5"
+                placeholder="z.B. Bremsbeläge vorne, Ölfilter, Stoßdämpfer hinten..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Jetzt Angebot anfragen
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="bg-gray-100 rounded-lg p-8">
+        <h3 class="text-2xl font-bold mb-4 text-center">Auto Teile Zürich finden</h3>
+        <div class="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
+          <div class="text-center text-gray-500">
+            <p class="text-lg font-semibold">📍 Auto Teile Zürich AG</p>
+            <p class="text-sm mt-2">Gutstrasse 158, 8055 Zürich</p>
+            <p class="text-xs mt-1">Gut erreichbar mit ÖV und Auto</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer companyName="Auto Teile Zürich AG" />
+  <AIChat
+    businessType="auto-parts"
+    companyName="Auto Teile Zürich AG"
+    phone="044 455 33 11"
+    mapsUrl="https://www.google.de/maps/place/AutoTeile+Z%C3%BCrich+AG/@47.3742498,8.5005682,16z/data=!3m1!4b1!4m6!3m5!1s0x47900a23eda4d50d:0x3d36dff4669b3f79!8m2!3d47.3742462!4d8.5031431!16s%2Fg%2F1tcy7tf4?entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D"
+  />
+</Layout>

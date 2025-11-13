@@ -1,0 +1,31 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+interface Props {
+  services: Service[];
+  title?: string;
+}
+
+const { services, title = "Unsere Leistungen" } = Astro.props;
+---
+
+<section id="services" class="py-16 px-4 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">{title}</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+          {service.icon && (
+            <div class="text-4xl mb-4">{service.icon}</div>
+          )}
+          <h3 class="text-xl font-semibold mb-3 text-blue-600">{service.title}</h3>
+          <p class="text-gray-600">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

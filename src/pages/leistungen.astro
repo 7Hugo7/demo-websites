@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import ImageCard from '../components/ImageCard.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const services = [
+  {
+    title: "Original-Ersatzteile für alle Marken",
+    description: "Auto Teile Zürich liefert Original-Ersatzteile für VW, Audi, BMW, Mercedes, Opel, Ford und alle gängigen Fahrzeugmarken - direkt an der Gutstrasse 158 in Zürich."
+  },
+  {
+    title: "Express-Teilesuche innert 24h",
+    description: "Senden Sie uns Ihre Fahrzeugdaten oder Fahrzeugausweis - wir finden das benötigte Teil und machen Ihnen ein Angebot binnen 24 Stunden."
+  },
+  {
+    title: "Fachberatung von Profis",
+    description: "Unsere Spezialisten kennen jedes Fahrzeugmodell. Wir beraten Sie persönlich bei der Auswahl von Bremsbelägen, Stoßdämpfern, Filtern und komplexen Motorteilen."
+  },
+  {
+    title: "Individuelle Angebote",
+    description: "Laden Sie Ihren Fahrzeugausweis hoch oder rufen Sie uns an unter 044 455 33 11 - Sie erhalten ein maßgeschneidertes Angebot für Ihr Fahrzeug."
+  },
+  {
+    title: "Markenteile: Fuchs, Rowe, Liqui Moly",
+    description: "Auto Teile Zürich führt ausschließlich Qualitäts-Markenteile von Fuchs, Rowe, Liqui Moly und weiteren renommierten Herstellern aus Deutschland und der Schweiz."
+  },
+  {
+    title: "Transparente Preise",
+    description: "Keine versteckten Kosten. Bei Auto Teile Zürich erhalten Sie faire Preise und ehrliche Beratung - seit Jahren bewährt in Zürich."
+  }
+];
+---
+
+<Layout
+  title="Leistungen - Auto Teile Zürich AG"
+  description="Original-Ersatzteile für alle Automarken in Zürich. Express-Lieferung, Fachberatung und faire Preise an der Gutstrasse 158."
+>
+  <Navigation companyName="Auto Teile Zürich AG" phone="044 455 33 11" currentPage="leistungen" />
+
+  <Hero
+    title="Ersatzteile für Ihr Fahrzeug in Zürich"
+    subtitle="Von Bremsbelägen bis Motorteilen - Auto Teile Zürich liefert Original-Ersatzteile für alle Marken"
+    backgroundImage="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200&h=600&fit=crop"
+  />
+
+  <Services services={services} />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Produktkategorien</h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        <ImageCard
+          src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=400&fit=crop"
+          alt="Bremsbeläge"
+          title="Bremsbeläge & Scheiben"
+        />
+        <ImageCard
+          src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&h=400&fit=crop"
+          alt="Filter"
+          title="Filter & Öle"
+        />
+        <ImageCard
+          src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&h=400&fit=crop"
+          alt="Motorteile"
+          title="Motorteile"
+        />
+        <ImageCard
+          src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop"
+          alt="Fahrwerk"
+          title="Fahrwerk & Lenkung"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Unsicher welches Teil Sie brauchen?</h2>
+      <p class="text-gray-600 mb-8">
+        Die Experten von Auto Teile Zürich helfen Ihnen weiter. Rufen Sie uns an unter 044 455 33 11
+        oder besuchen Sie uns an der Gutstrasse 158 in Zürich. Wir finden garantiert das richtige Ersatzteil für Ihr Fahrzeug.
+      </p>
+      <a href="/kontakt" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+        Jetzt Angebot für Ihr Fahrzeug anfragen
+      </a>
+    </div>
+  </section>
+
+  <Footer companyName="Auto Teile Zürich AG" />
+  <AIChat
+    businessType="auto-parts"
+    companyName="Auto Teile Zürich AG"
+    phone="044 455 33 11"
+    mapsUrl="https://www.google.de/maps/place/AutoTeile+Z%C3%BCrich+AG/@47.3742498,8.5005682,16z/data=!3m1!4b1!4m6!3m5!1s0x47900a23eda4d50d:0x3d36dff4669b3f79!8m2!3d47.3742462!4d8.5031431!16s%2Fg%2F1tcy7tf4?entry=ttu&g_ep=EgoyMDI1MTExMS4wIKXMDSoASAFQAw%3D%3D"
+  />
+</Layout>
