@@ -65,11 +65,7 @@ Vor jedem Deployment prüfen:
 ### Git Workflow
 ```bash
 git add -A
-git commit -m "Beschreibung der Änderungen
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>"
+git commit -m "Beschreibung der Änderungen"
 git push origin main
 npx vercel --prod
 ```
