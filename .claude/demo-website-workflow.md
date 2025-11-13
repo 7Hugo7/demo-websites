@@ -20,10 +20,21 @@ Wenn der User nur eine URL angibt, folge diesem Workflow:
   * Welche Sprache/Tonalität nutzt die aktuelle Website?
 ```
 
-### 2. Neue Seite erstellen
+### 2. Neue Demo-Website erstellen
 ```
-- Erstelle einen neuen Ordner in src/pages/ mit dem Firmennamen (z.B. src/pages/autoteile/)
-- Oder erstelle eine neue .astro Datei wenn es eine separate Website werden soll
+- Erstelle einen neuen Ordner in demos/ mit dem Firmen-/Projektnamen (z.B. demos/autoteile-zurich/)
+- Kopiere die Struktur eines bestehenden Demos oder erstelle neue Astro-Projekt-Struktur:
+  demos/demo-name/
+  ├── src/
+  │   ├── components/
+  │   ├── layouts/
+  │   ├── pages/
+  │   └── styles/
+  ├── public/
+  ├── package.json
+  ├── astro.config.mjs
+  ├── tsconfig.json
+  └── vercel.json
 ```
 
 ### 3. 4-seitige Website generieren
@@ -266,13 +277,29 @@ const services = [
 
 ### 9. Testing
 ```bash
-npm run build  # Prüfen ob alles kompiliert
-npm run dev    # Dev-Server starten
+cd demos/demo-name
+npm install     # Dependencies installieren (beim ersten Mal)
+npm run build   # Prüfen ob alles kompiliert
+npm run dev     # Dev-Server starten
 ```
 
-### 10. Fertigstellung
+### 10. Deployment zu Vercel
+```bash
+cd demos/demo-name
+npx vercel --prod --yes                          # Erstmalig deployen
+npx vercel alias <deployment-url> demo-name.vercel.app  # Custom URL setzen
+```
+
+Jede Demo wird als separates Vercel-Projekt deployed mit eigener URL:
+- autoteile-zurich.vercel.app
+- bakery-demo.vercel.app
+- restaurant-demo.vercel.app
+etc.
+
+### 11. Fertigstellung
 - Bestätige dem User die fertige Website
 - URL zum Dev-Server: http://localhost:4321
+- URL zur Live-Demo: https://demo-name.vercel.app
 - Hinweis auf Deployment-Bereitschaft (Vercel)
 
 ## ⚠️ KRITISCHE Regeln - IMMER befolgen!
@@ -308,9 +335,29 @@ User sagt nur: `https://www.example-bakery.ch`
 Du machst:
 1. ✅ WebFetch auf URL
 2. ✅ Infos extrahieren
-3. ✅ 4 Seiten erstellen (Home, Produkte, Über uns, Kontakt)
-4. ✅ Bilder von Unsplash (bakery, bread, pastry)
-5. ✅ Orange/Amber Farbschema
-6. ✅ Alle Komponenten nutzen
-7. ✅ Build & Dev-Server starten
-8. ✅ "Fertig! Die Website läuft auf http://localhost:4321"
+3. ✅ Neuen Demo-Ordner erstellen: `demos/example-bakery/`
+4. ✅ 4 Seiten erstellen (Home, Produkte, Über uns, Kontakt)
+5. ✅ Bilder von Unsplash (bakery, bread, pastry)
+6. ✅ Orange/Amber Farbschema
+7. ✅ Alle Komponenten nutzen
+8. ✅ Build & Dev-Server starten
+9. ✅ "Fertig! Die Website läuft auf http://localhost:4321"
+10. ✅ Optional: Deploy zu Vercel mit `npx vercel --prod` und alias setzen
+
+## Monorepo-Struktur
+
+Dieses Projekt ist als Monorepo organisiert. Jede Demo-Website ist ein eigenständiges Astro-Projekt in `demos/`:
+
+```
+demo-websites/
+├── demos/
+│   ├── autoteile-zurich/     # Demo 1: https://autoteile-zurich.vercel.app
+│   ├── bakery-demo/          # Demo 2: https://bakery-demo.vercel.app
+│   └── restaurant-demo/      # Demo 3: https://restaurant-demo.vercel.app
+└── README.md
+```
+
+Jede Demo hat ihre eigene:
+- package.json (Dependencies)
+- vercel.json (Deployment-Config)
+- Eigene Vercel-Deployment-URL
