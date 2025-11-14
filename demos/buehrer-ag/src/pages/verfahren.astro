@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import ImageCard from '../components/ImageCard.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const processes = [
+  {
+    name: "Lichtbogenspritzen",
+    role: "Wirtschaftliches Verfahren für Korrosionsschutz und Verschleissschutz",
+    image: "https://www.buehrer-ag.ch/wp-content/uploads/2015/08/Kontaktrohr2-175x145.jpg"
+  },
+  {
+    name: "HVOF-Spritzen",
+    role: "Hochgeschwindigkeits-Flammspritzen für extreme Härte und Dichte",
+    image: "https://www.buehrer-ag.ch/wp-content/uploads/2015/08/KK-Körper1-175x145.jpg"
+  },
+  {
+    name: "Plasma-Spritzen",
+    role: "Hochtemperatur-Verfahren für keramische und metallische Beschichtungen",
+    image: "https://www.buehrer-ag.ch/wp-content/uploads/2015/08/2teilige-Lagerschale.jpg"
+  }
+];
+
+const openingHours = [
+  { day: "Mo - Do", hours: "07:00 - 12:00, 13:30 - 17:00" },
+  { day: "Fr", hours: "07:00 - 12:00, 13:30 - 16:00" },
+  { day: "Sa & So", hours: "Geschlossen" }
+];
+---
+
+<Layout
+  title="Spritzverfahren - Bührer AG"
+  description="Thermische Spritzverfahren bei Bührer AG: Lichtbogenspritzen, HVOF, Plasma und Flammspritzen für höchste Anforderungen."
+>
+  <TopBar
+    email="info@buehrer-ag.ch"
+    phone="+41 (0)44 844 25 50"
+    promotion="Professionelle Oberflächentechnik seit 1965 - Kostenlose Beratung!"
+  />
+  <Navigation companyName="Bührer AG" phone="+41 (0)44 844 25 50" currentPage="verfahren" />
+
+  <Hero
+    title="Thermische Spritzverfahren"
+    subtitle="Modernste Technologien für optimale Beschichtungsqualität"
+    backgroundImage="https://www.buehrer-ag.ch/wp-content/uploads/2015/08/P1010001.jpg"
+  />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <img
+            src="https://www.buehrer-ag.ch/wp-content/uploads/2016/02/JAU7197.jpg"
+            alt="Thermisches Spritzen Bührer AG"
+            class="rounded-lg shadow-lg"
+          />
+        </div>
+        <div>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">Was ist thermisches Spritzen?</h2>
+          <p class="text-sm md:text-base text-gray-600 mb-4">
+            Beim thermischen Spritzen werden Werkstoffe erhitzt und in geschmolzenem oder plastischem Zustand
+            mit hoher Geschwindigkeit auf Oberflächen aufgebracht. Dadurch entstehen hochwertige, dauerhafte Beschichtungen
+            mit aussergewöhnlichen Eigenschaften.
+          </p>
+          <p class="text-sm md:text-base text-gray-600 mb-4">
+            Bührer AG setzt modernste Verfahren ein: Lichtbogenspritzen, Flammspritzen, HVOF (High Velocity Oxygen Fuel)
+            und Plasma-Spritzen. Jedes Verfahren hat spezifische Vorteile für unterschiedliche Anwendungen -
+            von Korrosionsschutz über Verschleissschutz bis zu thermischen Barrieren.
+          </p>
+          <p class="text-sm md:text-base text-gray-600">
+            Die Beschichtungen schützen Bauteile vor Korrosion, Verschleiss, Hitze und chemischen Einflüssen.
+            Gleichzeitig ermöglichen sie die wirtschaftliche Reparatur und Aufarbeitung von Maschinenteilen.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        {processes.map((process) => (
+          <ImageCard
+            src={process.image}
+            alt={process.name}
+            title={process.name}
+            description={process.role}
+          />
+        ))}
+      </div>
+
+      <div class="bg-gray-50 rounded-lg p-4 md:p-8">
+        <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Vorteile thermischer Spritzverfahren</h3>
+        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+          <ul class="space-y-2 md:space-y-3">
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Korrosionsschutz:</strong> Langlebiger Schutz gegen Rost und Oxidation</span>
+            </li>
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Verschleissschutz:</strong> Erhöhte Standzeit und Lebensdauer von Bauteilen</span>
+            </li>
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Wirtschaftlich:</strong> Reparatur statt Neuanschaffung spart Kosten</span>
+            </li>
+          </ul>
+          <ul class="space-y-2 md:space-y-3">
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Vielseitig:</strong> Anwendbar auf verschiedenste Materialien und Geometrien</span>
+            </li>
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Präzise:</strong> Exakte Schichtdicken und Oberflächenqualität</span>
+            </li>
+            <li class="flex items-start gap-2 md:gap-3">
+              <span class="text-[#4D7ABF] text-lg md:text-xl flex-shrink-0">✓</span>
+              <span class="text-sm md:text-base text-gray-600"><strong>Mobil:</strong> Vor-Ort-Service für grosse oder fest installierte Teile</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    email="info@buehrer-ag.ch"
+    openingHours={openingHours}
+  />
+  <AIChat
+    businessType="industrial"
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    mapsUrl="https://www.google.com/maps/place/Lauetstrasse+13,+8112+Otelfingen"
+    primaryColor="#4D7ABF"
+  />
+</Layout>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  ctaText?: string;
+  ctaLink?: string;
+  backgroundImage?: string;
+}
+
+const { title, subtitle, ctaText, ctaLink, backgroundImage } = Astro.props;
+---
+
+<section class="relative overflow-hidden text-white py-24 px-4">
+  {backgroundImage && (
+    <div class="absolute inset-0">
+      <img src={backgroundImage} alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-br from-[#4D7ABF]/80 to-[#3D6AAF]/70"></div>
+    </div>
+  )}
+  {!backgroundImage && (
+    <div class="absolute inset-0 bg-gradient-to-br from-[#4D7ABF] to-[#3D6AAF]"></div>
+  )}
+  <div class="relative max-w-6xl mx-auto text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">{title}</h1>
+    <p class="text-xl md:text-2xl mb-8 drop-shadow-md">{subtitle}</p>
+    {ctaText && ctaLink && (
+      <a
+        href={ctaLink}
+        class="inline-block bg-white text-[#4D7ABF] font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
+      >
+        {ctaText}
+      </a>
+    )}
+  </div>
+</section>

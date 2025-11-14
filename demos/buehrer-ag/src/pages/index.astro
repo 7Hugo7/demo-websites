@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import ImageCard from '../components/ImageCard.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const services = [
+  {
+    title: "Thermisches Spritzen",
+    description: "Lichtbogen-, Flamm- und HVOF-Spritzen für höchste Anforderungen."
+  },
+  {
+    title: "Plasma-Beschichtung",
+    description: "Hochwertige Plasma-Beschichtungen für extreme Belastungen."
+  },
+  {
+    title: "Sandstrahlen",
+    description: "Professionelle Oberflächenvorbereitung und -behandlung."
+  },
+  {
+    title: "Mobile Reparatur",
+    description: "Vor-Ort-Service mit mobiler Schweiss- und Spritzausrüstung."
+  }
+];
+
+const openingHours = [
+  { day: "Mo - Do", hours: "07:00 - 12:00, 13:30 - 17:00" },
+  { day: "Fr", hours: "07:00 - 12:00, 13:30 - 16:00" },
+  { day: "Sa & So", hours: "Geschlossen" }
+];
+
+---
+
+<Layout
+  title="Bührer AG - Thermisches Spritzen & Oberflächentechnik"
+  description="Bührer AG - Spezialist für thermisches Spritzen, Plasma-Beschichtung und Oberflächenbehandlung. Metallspritzen, HVOF, Sandstrahlen und mobile Reparaturen."
+>
+  <TopBar
+    email="info@buehrer-ag.ch"
+    phone="+41 (0)44 844 25 50"
+    promotion="Professionelle Oberflächentechnik seit 1965 - Kostenlose Beratung!"
+  />
+  <Navigation companyName="Bührer AG" phone="+41 (0)44 844 25 50" currentPage="home" />
+
+  <Hero
+    title="Bührer AG - Thermisches Spritzen seit 1965"
+    subtitle="Spezialist für Metallspritzen, Plasma-Beschichtung und HVOF-Verfahren - Ihr Partner für industrielle Oberflächentechnik"
+    ctaText="Jetzt Beratung anfragen"
+    ctaLink="/kontakt"
+    backgroundImage="https://www.buehrer-ag.ch/wp-content/uploads/2015/08/website.jpg"
+  />
+
+  <Services services={services} />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Warum Bührer AG?</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <ImageCard
+          src="https://www.buehrer-ag.ch/wp-content/uploads/2016/02/JAU7197.jpg"
+          alt="Thermisches Spritzen Bührer AG"
+          title="Seit 1965 in der Schweiz"
+          description="Seit 1965 Ihr kompetenter Partner für thermisches Spritzen und Oberflächentechnik. Standort: Otelfingen bei Zürich."
+        />
+        <ImageCard
+          src="https://www.buehrer-ag.ch/wp-content/uploads/2015/08/2teilige-Lagerschale.jpg"
+          alt="Präzision und Qualität"
+          title="Höchste Präzision"
+          description="Modernste Verfahren wie HVOF, Plasma und Lichtbogenspritzen für optimale Ergebnisse."
+        />
+        <ImageCard
+          src="https://www.buehrer-ag.ch/wp-content/uploads/2015/08/P1010001.jpg"
+          alt="Vielseitige Anwendungen"
+          title="Vielseitige Lösungen"
+          description="Von der Bauteilreparatur bis zur Neubeschichtung - massgeschneiderte Oberflächenlösungen."
+        />
+      </div>
+    </div>
+  </section>
+
+  <Footer
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    email="info@buehrer-ag.ch"
+    openingHours={openingHours}
+  />
+
+  <AIChat
+    businessType="industrial"
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    mapsUrl="https://www.google.com/maps/place/Lauetstrasse+13,+8112+Otelfingen"
+    primaryColor="#4D7ABF"
+  />
+</Layout>

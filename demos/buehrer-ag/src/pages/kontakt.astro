@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Contact from '../components/Contact.astro';
+import OpeningHours from '../components/OpeningHours.astro';
+import Footer from '../components/Footer.astro';
+import AIChat from '../components/AIChat.astro';
+
+const schedule = [
+  { day: "Montag - Donnerstag", hours: "07:00 - 12:00 Uhr" },
+  { day: "Montag - Donnerstag", hours: "13:30 - 17:00 Uhr" },
+  { day: "Freitag", hours: "07:00 - 12:00 Uhr" },
+  { day: "Freitag", hours: "13:30 - 16:00 Uhr" }
+];
+
+const openingHours = [
+  { day: "Mo - Do", hours: "07:00 - 12:00, 13:30 - 17:00" },
+  { day: "Fr", hours: "07:00 - 12:00, 13:30 - 16:00" },
+  { day: "Sa & So", hours: "Geschlossen" }
+];
+---
+
+<Layout
+  title="Kontakt - Bührer AG"
+  description="Kontaktieren Sie Bührer AG für thermisches Spritzen und Oberflächentechnik. Telefon: 062 965 80 80. Individuelle Beratung für Ihr Projekt."
+>
+  <TopBar
+    email="info@buehrer-ag.ch"
+    phone="+41 (0)44 844 25 50"
+    promotion="Professionelle Oberflächentechnik seit 1965 - Kostenlose Beratung!"
+  />
+  <Navigation companyName="Bührer AG" phone="+41 (0)44 844 25 50" currentPage="kontakt" />
+
+  <Hero
+    title="Kontaktieren Sie uns"
+    subtitle="Wir beraten Sie gerne zu Ihrem Beschichtungsprojekt - telefonisch oder vor Ort"
+    backgroundImage="https://www.buehrer-ag.ch/wp-content/uploads/2015/08/website.jpg"
+  />
+
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Bührer AG</h2>
+          <div class="space-y-4 md:space-y-6">
+            <div class="flex items-start gap-3 md:gap-4">
+              <div class="text-[#4D7ABF] text-xl md:text-2xl flex-shrink-0">📍</div>
+              <div>
+                <h3 class="font-semibold mb-1 text-sm md:text-base">Unser Standort</h3>
+                <p class="text-sm md:text-base text-gray-600">
+                  <strong>Bührer AG</strong><br />
+                  Lauetstrasse 13<br />
+                  CH-8112 Otelfingen<br />
+                  Schweiz
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 md:gap-4">
+              <div class="text-[#4D7ABF] text-xl md:text-2xl flex-shrink-0">📞</div>
+              <div>
+                <h3 class="font-semibold mb-1 text-sm md:text-base">Rufen Sie uns an</h3>
+                <a href="tel:+41448442550" class="text-[#4D7ABF] hover:underline text-base md:text-lg font-semibold">+41 (0)44 844 25 50</a>
+                <p class="text-gray-600 text-xs md:text-sm mt-1">Kompetente Beratung durch unsere Oberflächentechnik-Experten</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 md:gap-4">
+              <div class="text-[#4D7ABF] text-xl md:text-2xl flex-shrink-0">✉️</div>
+              <div>
+                <h3 class="font-semibold mb-1 text-sm md:text-base">E-Mail</h3>
+                <a href="mailto:info@buehrer-ag.ch" class="text-[#4D7ABF] hover:underline text-sm md:text-base">info@buehrer-ag.ch</a>
+                <p class="text-gray-600 text-xs md:text-sm mt-1">Schreiben Sie uns für eine unverbindliche Beratung</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Projekt-Anfrage</h2>
+          <p class="text-sm md:text-base text-gray-600 mb-4">
+            Beschreiben Sie uns Ihr Beschichtungsprojekt -
+            wir melden uns umgehend mit einer fachkundigen Beratung.
+          </p>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium mb-2">Ihr Name *</label>
+              <input
+                type="text"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4D7ABF] focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">E-Mail *</label>
+              <input
+                type="email"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4D7ABF] focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Telefon</label>
+              <input
+                type="tel"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4D7ABF] focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Firma</label>
+              <input
+                type="text"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4D7ABF] focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">Ihre Anfrage *</label>
+              <textarea
+                rows="5"
+                placeholder="Beschreiben Sie Ihr Projekt, die gewünschte Beschichtung oder stellen Sie uns Ihre Fragen..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4D7ABF] focus:border-transparent"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[#4D7ABF] text-white py-3 rounded-lg font-semibold hover:bg-[#3D6AAF] transition-colors"
+            >
+              Anfrage senden
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="bg-gray-100 rounded-lg p-4 md:p-8">
+        <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center">Bührer AG - Ihr Partner für Oberflächentechnik</h3>
+        <div class="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
+          <div class="text-center text-gray-500">
+            <p class="text-lg font-semibold">🔥 Bührer AG</p>
+            <p class="text-sm mt-2">Thermisches Spritzen & Oberflächentechnik</p>
+            <p class="text-xs mt-1">Kontaktieren Sie uns für Ihr Projekt</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    email="info@buehrer-ag.ch"
+    openingHours={openingHours}
+  />
+  <AIChat
+    businessType="industrial"
+    companyName="Bührer AG"
+    phone="+41 (0)44 844 25 50"
+    mapsUrl="https://www.google.com/maps/place/Lauetstrasse+13,+8112+Otelfingen"
+    primaryColor="#4D7ABF"
+  />
+</Layout>
