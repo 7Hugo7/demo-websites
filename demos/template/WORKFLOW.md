@@ -197,11 +197,12 @@ backgroundImage="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789"
 ### 5. Content & UX Richtlinien
 - **Texte auf Mobile: kurz und prägnant halten**
 - Services: Max. 4-6 Items, kurze Beschreibungen (1 Satz)
-- **WICHTIG: B2B/Professional Sites - KEINE Emoji-Icons verwenden!**
-  - B2B-Websites (Industrie, Handwerk, Professional Services) müssen professionell wirken
-  - KEINE Emojis in Services, Cards, oder Content
-  - Nur bei B2C (Bäckerei, Restaurant, etc.) sind Emojis akzeptabel
-  - Alternative: Verwende SVG-Icons oder Text ohne Icons
+- **WICHTIG: Emoji-Icons - Professionelles Design bevorzugen!**
+  - **Generell: KEINE Emojis verwenden** für ein professionelles Erscheinungsbild
+  - B2B-Websites (Industrie, Handwerk, Professional Services): Strikt KEINE Emojis
+  - Technische/Handwerkliche B2C (Auto-Teile, Werkstätten, etc.): KEINE Emojis
+  - Nur bei sehr casual B2C (Bäckerei, Restaurant, Café): Emojis optional akzeptabel
+  - Alternative: Verwende SVG-Icons, Font-Icons oder gar keine Icons (saubereres Design)
 - Keine überwältigenden Textmengen auf kleinen Bildschirmen
 - Grid Layouts: 2 Spalten auf Mobile, 4 auf Desktop
 - Schriftgrößen: text-xs/text-sm auf Mobile, text-base auf Desktop

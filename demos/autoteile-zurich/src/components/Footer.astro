@@ -2,23 +2,59 @@
 interface Props {
   companyName: string;
   year?: number;
+  phone?: string;
+  email?: string;
+  openingHours?: Array<{ day: string; hours: string }>;
 }
 
-const { companyName, year = new Date().getFullYear() } = Astro.props;
+const { companyName, year = new Date().getFullYear(), phone, email, openingHours } = Astro.props;
 ---
 
 <footer class="bg-gray-900 text-white py-8 px-4">
-  <div class="max-w-6xl mx-auto text-center">
-    <div class="mb-6 p-3 md:p-4 bg-yellow-900/30 border border-yellow-500/50 rounded-lg">
-      <p class="text-yellow-300 font-semibold text-sm md:text-base">⚠️ Hinweis / Disclaimer</p>
-      <p class="text-yellow-200 text-xs md:text-sm mt-2">
-        Dies ist keine offizielle Website des Unternehmens. Diese Seite dient ausschließlich zu Demonstrationszwecken.
-      </p>
-    </div>
-    <p class="text-gray-400 text-sm md:text-base">&copy; {year} {companyName}. Alle Rechte vorbehalten.</p>
-    <div class="mt-4 space-x-4 text-sm md:text-base">
-      <a href="#" class="text-gray-400 hover:text-white transition-colors">Impressum</a>
-      <a href="#" class="text-gray-400 hover:text-white transition-colors">Datenschutz</a>
+  <div class="max-w-6xl mx-auto">
+    {(openingHours || phone || email) && (
+      <div class="grid md:grid-cols-3 gap-6 mb-8 text-center md:text-left">
+        {openingHours && (
+          <div>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">Öffnungszeiten</h4>
+            <div class="text-gray-400 text-xs md:text-sm space-y-1">
+              {openingHours.map((schedule) => (
+                <p>{schedule.day}: {schedule.hours}</p>
+              ))}
+            </div>
+          </div>
+        )}
+        {phone && (
+          <div>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">Telefon</h4>
+            <a href={`tel:${phone.replace(/\s/g, '')}`} class="text-gray-400 hover:text-white transition-colors text-xs md:text-sm">
+              {phone}
+            </a>
+          </div>
+        )}
+        {email && (
+          <div>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">E-Mail</h4>
+            <a href={`mailto:${email}`} class="text-gray-400 hover:text-white transition-colors text-xs md:text-sm">
+              {email}
+            </a>
+          </div>
+        )}
+      </div>
+    )}
+
+    <div class="text-center">
+      <div class="mb-6 p-3 md:p-4 bg-yellow-900/30 border border-yellow-500/50 rounded-lg">
+        <p class="text-yellow-300 font-semibold text-sm md:text-base">Hinweis / Disclaimer</p>
+        <p class="text-yellow-200 text-xs md:text-sm mt-2">
+          Dies ist keine offizielle Website des Unternehmens. Diese Seite dient ausschließlich zu Demonstrationszwecken.
+        </p>
+      </div>
+      <p class="text-gray-400 text-sm md:text-base">&copy; {year} {companyName}. Alle Rechte vorbehalten.</p>
+      <div class="mt-4 space-x-4 text-sm md:text-base">
+        <a href="#" class="text-gray-400 hover:text-white transition-colors">Impressum</a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors">Datenschutz</a>
+      </div>
     </div>
   </div>
 </footer>

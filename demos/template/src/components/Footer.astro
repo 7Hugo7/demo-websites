@@ -16,7 +16,7 @@ const { companyName, year = new Date().getFullYear(), phone, email, openingHours
       <div class="grid md:grid-cols-3 gap-6 mb-8 text-center md:text-left">
         {openingHours && (
           <div>
-            <h4 class="font-semibold mb-3 text-sm md:text-base">🕒 Öffnungszeiten</h4>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">Öffnungszeiten</h4>
             <div class="text-gray-400 text-xs md:text-sm space-y-1">
               {openingHours.map((schedule) => (
                 <p>{schedule.day}: {schedule.hours}</p>
@@ -26,7 +26,7 @@ const { companyName, year = new Date().getFullYear(), phone, email, openingHours
         )}
         {phone && (
           <div>
-            <h4 class="font-semibold mb-3 text-sm md:text-base">📞 Telefon</h4>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">Telefon</h4>
             <a href={`tel:${phone.replace(/\s/g, '')}`} class="text-gray-400 hover:text-white transition-colors text-xs md:text-sm">
               {phone}
             </a>
@@ -34,7 +34,7 @@ const { companyName, year = new Date().getFullYear(), phone, email, openingHours
         )}
         {email && (
           <div>
-            <h4 class="font-semibold mb-3 text-sm md:text-base">✉️ E-Mail</h4>
+            <h4 class="font-semibold mb-3 text-sm md:text-base">E-Mail</h4>
             <a href={`mailto:${email}`} class="text-gray-400 hover:text-white transition-colors text-xs md:text-sm">
               {email}
             </a>
@@ -45,7 +45,7 @@ const { companyName, year = new Date().getFullYear(), phone, email, openingHours
 
     <div class="text-center">
       <div class="mb-6 p-3 md:p-4 bg-yellow-900/30 border border-yellow-500/50 rounded-lg">
-        <p class="text-yellow-300 font-semibold text-sm md:text-base">⚠️ Hinweis / Disclaimer</p>
+        <p class="text-yellow-300 font-semibold text-sm md:text-base">Hinweis / Disclaimer</p>
         <p class="text-yellow-200 text-xs md:text-sm mt-2">
           Dies ist keine offizielle Website des Unternehmens. Diese Seite dient ausschließlich zu Demonstrationszwecken.
         </p>

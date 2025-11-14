@@ -1,6 +1,29 @@
 # Demo Website Builder - Automation Tool
 
-Local desktop application that automates the creation of demo websites using Claude API with function calling.
+Local desktop application that automates the creation of demo websites.
+
+## 🎯 Versions Available
+
+### 🤖 Fully Automated Version (RECOMMENDED) ⭐⭐⭐
+- **100% automated** - Just enter URL and click Start!
+- Uses AppleScript to open Terminal and run Claude automatically
+- **FREE** - No API costs
+- File: `demo_builder_auto.py`
+- See: [AUTO_VERSION.md](AUTO_VERSION.md)
+- **→ Run with: `./start.sh`**
+
+### 📋 Simple Version (Manual Copy/Paste)
+- Generates prompt, you paste it to Claude
+- **FREE** - No API costs
+- File: `demo_builder_simple.py`
+
+### 💳 API Version (For Servers/CI/CD)
+- Uses Anthropic API directly
+- Costs ~$0.50-$2 per demo
+- Works anywhere
+- File: `demo_builder.py`
+
+**For personal use: Use Automated Version!** 🤖
 
 ## Features
 

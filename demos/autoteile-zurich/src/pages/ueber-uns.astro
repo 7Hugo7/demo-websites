@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
 import Navigation from '../components/Navigation.astro';
 import Hero from '../components/Hero.astro';
 import OpeningHours from '../components/OpeningHours.astro';
@@ -18,17 +19,17 @@ const teamMembers = [
   {
     name: "Fachpersonal vor Ort",
     role: "Unsere Ersatzteil-Profis kennen jedes Fahrzeugmodell",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=400&fit=crop"
+    image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400&h=400&fit=crop&q=80"
   },
   {
     name: "Großes Lager in Zürich",
     role: "Tausende Original-Ersatzteile direkt verfügbar an der Gutstrasse 158",
-    image: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&h=400&fit=crop"
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=400&fit=crop&q=80"
   },
   {
     name: "Persönliche Beratung",
     role: "Individuelle Lösungen für Ihr Fahrzeug - vor Ort oder telefonisch",
-    image: "https://images.unsplash.com/photo-1521791055366-0d553872125f?w=400&h=400&fit=crop"
+    image: "https://www.autoteile-zuerich.ch/index_htm_files/12401.jpg"
   }
 ];
 ---
@@ -37,12 +38,18 @@ const teamMembers = [
   title="Über uns - Auto Teile Zürich AG"
   description="Auto Teile Zürich AG an der Gutstrasse 158 - Ihr Spezialist für Original-Ersatzteile in Zürich. Markenqualität von Fuchs, Rowe und Liqui Moly."
 >
+  <TopBar
+    phone="044 455 33 11"
+    email="atz@autoteile-zuerich.ch"
+    promotion="Original-Ersatzteile für alle Marken – Express-Lieferung 24h!"
+    backgroundColor="#2563eb"
+  />
   <Navigation companyName="Auto Teile Zürich AG" phone="044 455 33 11" currentPage="ueber-uns" />
 
   <Hero
     title="Auto Teile Zürich AG - Seit Jahren in Zürich"
     subtitle="Ihr Spezialist für Original-Ersatzteile an der Gutstrasse 158 in Zürich"
-    backgroundImage="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1200&h=600&fit=crop"
+    backgroundImage="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&h=600&fit=crop&q=80"
   />
 
   <section class="py-16 px-4 bg-white">
@@ -50,7 +57,7 @@ const teamMembers = [
       <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
         <div>
           <img
-            src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop"
+            src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop&q=80"
             alt="Auto Teile Zürich Werkstatt"
             class="rounded-lg shadow-lg"
           />
@@ -114,7 +121,12 @@ const teamMembers = [
     </div>
   </section>
 
-  <Footer companyName="Auto Teile Zürich AG" />
+  <Footer
+    companyName="Auto Teile Zürich AG"
+    phone="044 455 33 11"
+    email="atz@autoteile-zuerich.ch"
+    openingHours={schedule}
+  />
   <AIChat
     businessType="auto-parts"
     companyName="Auto Teile Zürich AG"

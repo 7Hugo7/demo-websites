@@ -88,11 +88,42 @@ if [ "$(uname)" == "Darwin" ]; then
     echo ""
 fi
 
-# Start the app
+# Ask user which version to use
+echo "Which version do you want to use?"
 echo ""
-echo "✨ Starting Demo Website Builder..."
+echo "1. 🤖 Fully Automated (needs macOS permissions)"
+echo "   - Automatically opens Terminal and sends prompt"
+echo "   - Requires: System Settings → Accessibility → Add Terminal"
 echo ""
-python demo_builder.py
+echo "2. 📋 Simple (no permissions needed)"
+echo "   - You copy/paste prompt to Claude manually"
+echo "   - Works immediately, no setup"
+echo ""
+read -p "Enter 1 or 2: " choice
+
+echo ""
+
+if [ "$choice" = "1" ]; then
+    echo "✨ Starting Fully Automated Version..."
+    echo "💰 FREE - No API costs!"
+    echo ""
+    echo "If you get a permission error:"
+    echo "→ See PERMISSIONS.md for setup guide"
+    echo ""
+    python demo_builder_auto.py
+else
+    echo "✨ Starting Simple Version..."
+    echo "💰 FREE - No API costs!"
+    echo ""
+    echo "How it works:"
+    echo "1. Click 'Generate Prompt'"
+    echo "2. Click 'Copy Prompt'"
+    echo "3. Open Terminal → run: claude"
+    echo "4. Paste (Cmd+V)"
+    echo "5. Click 'Start Monitoring'"
+    echo ""
+    python demo_builder_simple.py
+fi
 
 # Deactivate venv on exit
 deactivate 2>/dev/null
